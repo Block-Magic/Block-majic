@@ -11,4 +11,12 @@ describe('block-majic routes', () => {
   afterAll(() => {
     pool.end();
   });
+
+  it('should sign up a user with email and password via post route', async () => {
+    const res = await request(app)
+      .post('/api/v1/users')
+      .send({ email: 'dunderhead@blah.com', password: 'yourmomrules' });
+
+    expect(res.body).toEqual({ id: expect.any(String), email: 'dunderhead@blah.com' });
+  });
 });
