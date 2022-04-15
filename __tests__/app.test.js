@@ -23,7 +23,7 @@ describe('block-majic routes', () => {
 
   it('signs in an existing user', async () => {
     
-    const user = await UserService.createUser({
+    await UserService.createUser({
       email: 'dunderhead@blah.com', password: 'yourmomrules'
     });
     
@@ -32,8 +32,8 @@ describe('block-majic routes', () => {
       .send({ email: 'dunderhead@blah.com', password: 'yourmomrules' });
 
     expect(res.body).toEqual({
-      message:'Signed in Successfully',
-      user
+      message:'Signed in Successfully'
+     
     });
   });
 });
