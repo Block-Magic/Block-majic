@@ -22,15 +22,19 @@ describe('block-majic routes', () => {
   });
 
   it('signs in an existing user', async () => {
+    const agent = request.agent(app);
 
-    await UserService.createUser({
+    const user = await UserService.createUser({
       email: 'dunderhead@blah.com', password: 'yourmomrules'
     });
 
-    const res = await request(app)
+    const { email } = user;
+
+    const res = await agent
       .post('/api/v1/users/sessions')
-      .send({ email: 'dunderhead@blah.com', password: 'yourmomrules' })
-      .redirect(1);
+      .send({ email, password: 'yourmomrules' })
+      .redirects(1);
+
 
     expect(res.req.path).toEqual('/api/v1/users/homepage');
   });
