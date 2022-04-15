@@ -4,6 +4,7 @@ const request = require('supertest');
 const app = require('../lib/app');
 const UserService = require('../lib/services/UserService');
 const ProfileService = require('../lib/services/ProfileService');
+const Profile = require('../lib/models/Profile');
 
 describe('block-majic profile routes', () => {
   beforeEach(() => {
@@ -20,12 +21,11 @@ describe('block-majic profile routes', () => {
       password: '123456',
     });
 
-    const profile = await profile.getById(user.id);
+    const profile = await Profile.getById(user.id);
 
     expect(profile).toEqual({
-      user_id: expect.any(String),
-      public_key: expect.any(String),
-      balance: 100,
+      publicKey: expect.any(String),
+      balance: '100',
       id: expect.any(String),
     });
   });
