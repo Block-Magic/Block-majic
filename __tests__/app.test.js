@@ -38,4 +38,20 @@ describe('block-majic routes', () => {
 
     expect(res.req.path).toEqual('/api/v1/users/homepage');
   });
+
+  it('Should delete cookie from user object', async () => {
+    const agent = request.agent(app);
+
+    await agent.post('/api/v1/users/sessions')
+    .send({ email, password: 'yourmomrules' })
+    .redirects(1);
+
+    const res = await agent.delete('api/v1/users/session');
+
+    expect(res.body).toEqual({
+      success: true,
+      message: 'Successfully signed out!'
+    })
+    expect(res.status).toEqual(200)
+  })
 });
