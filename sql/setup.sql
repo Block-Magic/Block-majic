@@ -15,5 +15,5 @@ CREATE TABLE profiles (
     user_id uuid REFERENCES users(user_id) UNIQUE, 
     public_key TEXT NOT NULL,
     private_key TEXT NOT NULL,
-    wallet_balance BIGINT NOT NULL
+    balance BIGINT NOT NULL
 );
