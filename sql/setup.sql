@@ -17,3 +17,5 @@ CREATE TABLE profiles (
     private_key TEXT NOT NULL,
     balance BIGINT NOT NULL
 );
+
+
