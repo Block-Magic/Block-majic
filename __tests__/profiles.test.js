@@ -30,5 +30,15 @@ describe('block-majic profile routes', () => {
     });
   });
 
-  
+  it('Should fetch a list of all Users and display the public keys for each', async () => {
+    for (let i = 0; i < 20; i++) {
+      await UserService.createUser({
+        email: `thisIsAUnique@email${i}.com`,
+        password: `123456${i}`,
+      });
+    }
+
+    const res = await request(app).get('/api/v1/profiles');
+    expect(res.body.length).toEqual(20);
+  });
 });
