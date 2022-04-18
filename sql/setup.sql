@@ -18,4 +18,12 @@ CREATE TABLE profiles (
     balance BIGINT NOT NULL
 );
 
+CREATE TABLE transactions (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    amount BIGINT NOT NULL,
+    senderId TEXT NOT NULL,
+    receiverId TEXT NOT NULL,
+)
+
 
