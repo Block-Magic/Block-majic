@@ -8,22 +8,25 @@ const Blockchain = require('../lib/models/Blockchain');
 // const Profile = require('../lib/models/Profile');
 
 
-// const signUpAndLogin = async () => {
-//   const agent = request.agent(app);
+
+const signUpAndLoginAndCreateBlockchain = async () => {
+  const agent = request.agent(app);
   
-//   const user = await UserService.createUser({
-//     email: 'dunderhead@blah.com',
-//     password: 'yourmomrules',
-//   });
+  const user = await UserService.createUser({
+    email: 'dunderhead@blah.com',
+    password: 'yourmomrules',
+  });
   
-//   const { email } = user;
+  const { email } = user;
   
-//   await agent
-//     .post('/api/v1/users/sessions')
-//     .send({ email, password: 'yourmomrules' });
+  await agent
+    .post('/api/v1/users/sessions')
+    .send({ email, password: 'yourmomrules' });
   
-//   return agent;
-// };
+  const blockChain = new Blockchain;
+
+  return [blockChain, agent];
+};
 describe('block-majic Blockchain routes', () => {
   beforeEach(() => {
     return setup(pool);
@@ -34,7 +37,8 @@ describe('block-majic Blockchain routes', () => {
   });
 
   it('should return a new block from function create new block', async () => {
-    const blockChain = new Blockchain;
+    const [blockChain] = await 
+    signUpAndLoginAndCreateBlockchain();
     const res = await blockChain.addNewBlock({ hash: 'ASHD7368276E', previousHash: 'KAENDF72R87Y37', nonce: 2345 });
 
     expect(res).toEqual({
