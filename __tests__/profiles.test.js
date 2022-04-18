@@ -29,4 +29,6 @@ describe('block-majic profile routes', () => {
       id: expect.any(String),
     });
   });
+
+  
 });

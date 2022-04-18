@@ -39,7 +39,7 @@ describe('block-majic user routes', () => {
       .send({ email, password: 'yourmomrules' })
       .redirects(1);
 
-    expect(res.req.path).toEqual('/api/v1/users/homepage');
+    expect(res.req.path).toEqual('/api/v1/profiles');
   });
 
   it('Should delete cookie from user object', async () => {
