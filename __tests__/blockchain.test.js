@@ -49,6 +49,6 @@ describe('block-majic Blockchain routes', () => {
       hash: 'ASHD7368276E',
       previousHash: 'KAENDF72R87Y37',
     });
-
+    expect(blockChain.chain.length).toEqual(1);
   });
 });

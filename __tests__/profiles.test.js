@@ -37,7 +37,7 @@ describe('block-majic profile routes', () => {
       email: 'philsIdea@testing.com',
       password: '111111',
     });
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 2; i++) {
       await UserService.createUser({
         email: `thisIsAUnique@email${i}.com`,
         password: `123456${i}`,
@@ -50,6 +50,6 @@ describe('block-majic profile routes', () => {
     });
 
     const res = await agent.get('/api/v1/profiles');
-    expect(res.body.length).toEqual(6);
+    expect(res.body.length).toEqual(3);
   });
 });
