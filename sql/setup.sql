@@ -3,6 +3,7 @@
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS profiles CASCADE;
 DROP TABLE IF EXISTS transactions CASCADE;
+DROP TABLE IF EXISTS ledger CASCADE;
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE users (
@@ -25,7 +26,32 @@ CREATE TABLE transactions (
     amount BIGINT NOT NULL,
     senderId TEXT NOT NULL,
     receiverId TEXT NOT NULL
+);
+
+CREATE TABLE ledger (
+    previous_hash TEXT NOT NULL,
+    current_hash TEXT NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    transactions TEXT [],
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY
+);
+
+INSERT INTO ledger(
+    previous_hash,
+    current_hash
 )
+VALUES(
+    0000,
+    0000
+)
+
+
+
+
+
+
+
+
 
 
 
