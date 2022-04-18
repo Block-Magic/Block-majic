@@ -51,4 +51,21 @@ describe('block-majic Blockchain routes', () => {
     });
     expect(blockChain.chain.length).toEqual(1);
   });
+
+  it('should return the last block in the chain', async () => {
+    const [blockChain, agent] =  await 
+    signUpAndLoginAndCreateBlockchain();
+    await blockChain.addNewBlock({ hash: 'ASHD7368276E', previousHash: 'KAENDF72R87Y37', nonce: 2346 });
+    await blockChain.addNewBlock({ hash: 'ASHD7368276O', previousHash: 'KAENDF72R87Y38', nonce: 2347 });
+
+    const res = await agent.get(`/api/v1/blockchain/lastblock/${blockChain}`);
+
+    expect(res.body).toEqual({ 
+      index: 2,
+      timestamp: expect.any(Number),
+      transactions: expect.any(Array),
+      hash: 'ASHD7368276O', 
+      previousHash: 'KAENDF72R87Y38', 
+      nonce: 2347 });
+  });
 });
