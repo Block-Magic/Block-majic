@@ -10,12 +10,12 @@ const Profile = require('../lib/models/Profile');
 const signUpAndLogin = async () => {
   const agent = request.agent(app);
 
-  let user = await UserService.createUser({
+  const user = await UserService.createUser({
     email: 'dunderhead@blah.com',
     password: 'yourmomrules',
   });
 
-  let receiver = await UserService.createUser({
+  const receiver = await UserService.createUser({
     email: 'receiver@blah.com',
     password: 'yourmomrules',
   });
@@ -26,8 +26,6 @@ const signUpAndLogin = async () => {
     .post('/api/v1/users/sessions')
     .send({ email, password: 'yourmomrules' });
 
-  user = await Profile.getById(user.id);
-  receiver = await Profile.getById(receiver.id);
   return [agent, user, receiver];
 };
 
@@ -42,11 +40,13 @@ describe('block-majic profile routes', () => {
 
   it('Should create a new transaction and add to DB', async () => {
     const [agent, user, receiver] = await signUpAndLogin();
-    console.log('userrrrrrr', user.id);
-    const res = await agent.post('/api/v1/transactions').send({ amount:'100', sender: user.publicKey, receiver: receiver.publicKey });
+ 
+
+    
+    const res = await agent.post('/api/v1/transactions').send({ amount:'100', sender: user.id, receiver: receiver.id });
 
     expect(res.body).toEqual({
-      amount:'100', senderId: user.publicKey, receiverId: receiver.publicKey, timestamp: expect.any(String)
+      amount:'100', senderId: user.id, receiverId: receiver.id, timestamp: expect.any(String)
     });
   });
 
