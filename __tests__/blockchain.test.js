@@ -49,7 +49,19 @@ describe('block-majic Blockchain routes', () => {
     }]);
   });
 
-  // it('')
+  it('should get the last block on the chain', async () => {
+    const blockChain = new Blockchain();
+
+    expect(blockChain.getLastBlock()).toEqual({
+      timestamp: expect.any(Number),
+      transactions: [],
+      hash: expect.any(String),
+      nonce: 0,
+      previousHash: ''
+    });
+  });
+
+
 
   //   it('should return a new block from function create new block', async () => {
   //     const [blockChain] = await
