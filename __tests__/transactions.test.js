@@ -35,11 +35,21 @@ describe('block-majic profile routes', () => {
 
   it('Should create a new transaction and add to DB', async () => {
     const [agent, user] = await signUpAndLogin();
-    const res = await agent.post('/api/v1/transactions').send({ amount:'100', senderId: user.user_id, receiverId:'ASDFDF' });
+
+    const res = await agent.post('/api/v1/transactions').send({ amount:'100', senderId: user.id, receiverId:'ASDFDF' });
 
     expect(res.body).toEqual({
-      amount:'100', senderId: user.user_id, receiverId:'ASDFDF', timestamp: expect.any(Number)
+      amount:'100', senderId: user.id, receiverId:'ASDFDF', timestamp: expect.any(String)
     });
+  });
+
+  it('Should create a new block when 10 transactions have been created', async () => {
+    const [agent, user] = await signUpAndLogin();
+
+    for (let i = 0; i < 10; i++) {
+      await agent.post('/api/v1/transactions').send({ amount:'1', senderId: user.id, receiverId:'ASDFDF' });
+    }
+
   });
 });
 

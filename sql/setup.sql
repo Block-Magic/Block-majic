@@ -24,8 +24,8 @@ CREATE TABLE transactions (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     amount BIGINT NOT NULL,
-    senderId TEXT NOT NULL,
-    receiverId TEXT NOT NULL
+    sender_id TEXT NOT NULL,
+    receiver_id TEXT NOT NULL
 );
 
 CREATE TABLE ledger (
