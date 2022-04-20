@@ -3,8 +3,6 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const UserService = require('../lib/services/UserService');
-const ProfileService = require('../lib/services/ProfileService');
-const Profile = require('../lib/models/Profile');
 
 const signUpAndLogin = async () => {
   const agent = request.agent(app);
@@ -48,7 +46,7 @@ describe('block-majic profile routes', () => {
 
     const res = await agent
       .post('/api/v1/transactions')
-      .send({ amount: '10', sender: user.id, receiver: receiver.id });
+      .send({ amount: 10, sender: user.id, receiver: receiver.id });
     
 
     expect(res.body).toEqual({
@@ -67,7 +65,7 @@ describe('block-majic profile routes', () => {
 
     const res = await agent
       .post('/api/v1/transactions')
-      .send({ amount: '10', sender: user.id, receiver: receiver.id });
+      .send({ amount: 10, sender: user.id, receiver: receiver.id });
 
     expect(res.body).toEqual({
       amount: '10',
