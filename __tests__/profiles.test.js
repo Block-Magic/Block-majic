@@ -78,7 +78,6 @@ describe('block-majic profile routes', () => {
   it('should update the users balance', async () => {
     const [agent, user, receiver] = await signUpAndLogin();
 
-
     await agent
       .post('/api/v1/transactions')
       .send({ amount: 10, sender: user.id, receiver: receiver.id });
@@ -92,12 +91,30 @@ describe('block-majic profile routes', () => {
   it('should get a users balance information', async () => {
     const [agent, user, receiver] = await signUpAndLogin();
 
-    await agent 
+    await agent
       .post('/api/v1/transactions')
       .send({ amount: 10, sender: user.id, receiver: receiver.id });
 
-    const res = await agent.get('/api/v1/profiles/balance').send({ id: user.id });
+    const res = await agent
+      .get('/api/v1/profiles/balance')
+      .send({ id: user.id });
 
     expect(res.body).toEqual({ balance: '90' });
+  });
+
+  it('Should return a list of all transactions for given user', async () => {
+    const [agent, user, receiver] = await signUpAndLogin();
+
+    await agent
+      .post('/api/v1/transactions')
+      .send({ amount: 10, sender: user.id, receiver: receiver.id });
+
+    const res = await agent
+      .get('/api/v1/profiles/alltransactions')
+      .send({ id: user.id });
+
+    expect(res.body).toEqual({
+      transactions: expect.any(Array),
+    });
   });
 });
