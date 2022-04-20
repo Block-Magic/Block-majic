@@ -40,10 +40,10 @@ describe('block-majic profile routes', () => {
   it('Should create a new transaction and add to DB if more than transaction', async () => {
     const [agent, user, receiver] = await signUpAndLogin();
 
-    for (let i = 0; i < 9; i++) {
+    for (let i = 0; i < 10; i++) {
       await agent
         .post('/api/v1/transactions')
-        .send({ amount: i, sender: user.id, receiver: receiver.id });
+        .send({ amount: i + 1, sender: user.id, receiver: receiver.id });
     }
 
     const res = await agent
@@ -57,6 +57,7 @@ describe('block-majic profile routes', () => {
       previous_hash: expect.any(String),
       timestamp: expect.any(String),
       transactions: expect.any(Array),
+      
     });
   });
 
@@ -72,7 +73,10 @@ describe('block-majic profile routes', () => {
       amount: '10',
       senderId: expect.any(String),
       receiverId: expect.any(String),
-      timestamp:expect.any(String)
+      timestamp:expect.any(String),
+      signature: expect.any(String)
+
+
    
     });
 
