@@ -15,6 +15,7 @@ CREATE TABLE users (
 CREATE TABLE profiles (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     user_id uuid REFERENCES users(user_id) UNIQUE,
+    key_pair TEXT NOT NULL,
     public_key TEXT NOT NULL,
     private_key TEXT NOT NULL,
     balance BIGINT NOT NULL
