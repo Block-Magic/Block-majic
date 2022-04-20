@@ -6,7 +6,6 @@ const UserService = require('../lib/services/UserService');
 const ProfileService = require('../lib/services/ProfileService');
 const Profile = require('../lib/models/Profile');
 
-
 const signUpAndLogin = async () => {
   const agent = request.agent(app);
 
@@ -38,15 +37,19 @@ describe('block-majic profile routes', () => {
     pool.end();
   });
 
-  it('Should create a new transaction and add to DB', async () => {
+  it('Should create a new transaction and add to DB if more than transaction', async () => {
     const [agent, user, receiver] = await signUpAndLogin();
- 
 
-    
-    const res = await agent.post('/api/v1/transactions').send({ amount:'100', sender: user.id, receiver: receiver.id });
+    const res = await agent
+      .post('/api/v1/transactions')
+      .send({ amount: '10', sender: user.id, receiver: receiver.id });
 
     expect(res.body).toEqual({
-      amount:'100', senderId: user.id, receiverId: receiver.id, timestamp: expect.any(String)
+      current_hash: expect.any(String),
+      id: expect.any(String),
+      previous_hash: expect.any(String),
+      timestamp: expect.any(String),
+      transactions: expect.any(Array),
     });
   });
 
@@ -59,4 +62,3 @@ describe('block-majic profile routes', () => {
 
   // });
 });
-
