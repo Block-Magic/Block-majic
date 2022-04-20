@@ -3,7 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const UserService = require('../lib/services/UserService');
-const ProfileService = require('../lib/services/ProfileService');
+
 const Profile = require('../lib/models/Profile');
 
 const signUpAndLogin = async () => {
