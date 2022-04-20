@@ -25,8 +25,8 @@ CREATE TABLE transactions (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     amount BIGINT NOT NULL,
-    sender_id TEXT NOT NULL,
-    receiver_id TEXT NOT NULL,
+    sender_id uuid REFERENCES users(user_id),
+    receiver_id uuid REFERENCES users(user_id),
     signature TEXT NOT NULL
 );
 
