@@ -96,8 +96,8 @@ describe('block-majic profile routes', () => {
       .post('/api/v1/transactions')
       .send({ amount: 10, sender: user.id, receiver: receiver.id });
 
-    const res = await agent.get('/api/v1/profiles/balance');
+    const res = await agent.get('/api/v1/profiles/balance').send({ id: user.id });
 
-    expect(res.body).toEqual({ balance: '90', transaction: expect.any(Array) });
+    expect(res.body).toEqual({ balance: '90' });
   });
 });
