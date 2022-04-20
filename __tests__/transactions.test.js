@@ -37,7 +37,7 @@ describe('block-majic profile routes', () => {
     pool.end();
   });
 
-  it('Should create a new transaction and add to DB', async () => {
+  it('Should create a new transaction and add to DB if more than transaction', async () => {
     const [agent, user, receiver] = await signUpAndLogin();
 
     const res = await agent
@@ -45,10 +45,11 @@ describe('block-majic profile routes', () => {
       .send({ amount: '10', sender: user.id, receiver: receiver.id });
 
     expect(res.body).toEqual({
-      amount: '10',
-      senderId: user.id,
-      receiverId: receiver.id,
+      current_hash: expect.any(String),
+      id: expect.any(String),
+      previous_hash: expect.any(String),
       timestamp: expect.any(String),
+      transactions: expect.any(Array),
     });
   });
 

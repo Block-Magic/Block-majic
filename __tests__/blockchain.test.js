@@ -7,8 +7,6 @@ const Blockchain = require('../lib/models/Blockchain');
 // const ProfileService = require('../lib/services/ProfileService');
 // const Profile = require('../lib/models/Profile');
 
-
-
 // // const signUpAndLoginAndCreateBlockchain = async () => {
 // //   const agent = request.agent(app);
 
@@ -40,28 +38,26 @@ describe('block-majic Blockchain routes', () => {
     const blockChain = new Blockchain();
 
     expect(blockChain.chain.length).toBe(1);
-    expect(blockChain.chain).toEqual([{
-      timestamp: expect.any(Number),
-      transactions: [],
-      hash: expect.any(String),
-      nonce: 0,
-      previousHash: ''
-    }]);
+    expect(blockChain.chain).toEqual([
+      {
+        timestamp: expect.any(Number),
+        transactions: [],
+        hash: expect.any(String),
+        nonce: 0,
+        previousHash: '',
+      },
+    ]);
   });
 
   it('should get the last block on the chain', async () => {
-    const blockChain = new Blockchain();
-
-    expect(blockChain.getLastBlock()).toEqual({
-      timestamp: expect.any(Number),
-      transactions: [],
-      hash: expect.any(String),
-      nonce: 0,
-      previousHash: ''
+    expect(await Blockchain.getLastBlock()).toEqual({
+      timestamp: expect.any(Date),
+      transactions: null,
+      current_hash: expect.any(String),
+      previous_hash: '0',
+      id: expect.any(String),
     });
   });
-
-
 
   //   it('should return a new block from function create new block', async () => {
   //     const [blockChain] = await
@@ -87,12 +83,12 @@ describe('block-majic Blockchain routes', () => {
 
   //     const res = await agent.get(`/api/v1/blockchain/lastblock/${blockChain}`);
 
-//     expect(res.body).toEqual({
-//       index: 2,
-//       timestamp: expect.any(Number),
-//       transactions: expect.any(Array),
-//       hash: 'ASHD7368276O',
-//       previousHash: 'KAENDF72R87Y38',
-//       nonce: 2347 });
-//   });
+  //     expect(res.body).toEqual({
+  //       index: 2,
+  //       timestamp: expect.any(Number),
+  //       transactions: expect.any(Array),
+  //       hash: 'ASHD7368276O',
+  //       previousHash: 'KAENDF72R87Y38',
+  //       nonce: 2347 });
+  //   });
 });
