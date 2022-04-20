@@ -26,7 +26,8 @@ CREATE TABLE transactions (
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     amount BIGINT NOT NULL,
     sender_id TEXT NOT NULL,
-    receiver_id TEXT NOT NULL
+    receiver_id TEXT NOT NULL,
+    signature TEXT NOT NULL
 );
 
 CREATE TABLE ledger (

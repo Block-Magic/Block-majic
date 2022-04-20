@@ -40,9 +40,16 @@ describe('block-majic profile routes', () => {
   it('Should create a new transaction and add to DB if more than transaction', async () => {
     const [agent, user, receiver] = await signUpAndLogin();
 
+    for (let i = 0; i < 9; i++) {
+      await agent
+        .post('/api/v1/transactions')
+        .send({ amount: i, sender: user.id, receiver: receiver.id });
+    }
+
     const res = await agent
       .post('/api/v1/transactions')
       .send({ amount: '10', sender: user.id, receiver: receiver.id });
+    
 
     expect(res.body).toEqual({
       current_hash: expect.any(String),
@@ -53,12 +60,22 @@ describe('block-majic profile routes', () => {
     });
   });
 
-  // it('Should create a new block when 10 transactions have been created', async () => {
-  //   const [agent, user] = await signUpAndLogin();
 
-  //   for (let i = 0; i < 10; i++) {
-  //     await agent.post('/api/v1/transactions').send({ amount:'1', senderId: user.id, receiverId:'ASDFDF' });
-  //   }
+  it('Should create a new transaction and add to DB if less than 10 transactions in block', async () => {
+    const [agent, user, receiver] = await signUpAndLogin();
 
-  // });
+    const res = await agent
+      .post('/api/v1/transactions')
+      .send({ amount: '10', sender: user.id, receiver: receiver.id });
+
+    expect(res.body).toEqual({
+      amount: '10',
+      senderId: expect.any(String),
+      receiverId: expect.any(String),
+      timestamp:expect.any(String)
+   
+    });
+
+
+  });
 });
