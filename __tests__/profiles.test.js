@@ -6,6 +6,28 @@ const UserService = require('../lib/services/UserService');
 const ProfileService = require('../lib/services/ProfileService');
 const Profile = require('../lib/models/Profile');
 
+const signUpAndLogin = async () => {
+  const agent = request.agent(app);
+
+  const user = await UserService.createUser({
+    email: 'dunderhead@blah.com',
+    password: 'yourmomrules',
+  });
+
+  const receiver = await UserService.createUser({
+    email: 'receiver@blah.com',
+    password: 'yourmomrules',
+  });
+
+  const { email } = user;
+
+  await agent
+    .post('/api/v1/users/sessions')
+    .send({ email, password: 'yourmomrules' });
+
+  return [agent, user, receiver];
+};
+
 describe('block-majic profile routes', () => {
   beforeEach(() => {
     return setup(pool);
@@ -51,5 +73,19 @@ describe('block-majic profile routes', () => {
 
     const res = await agent.get('/api/v1/profiles');
     expect(res.body.length).toEqual(3);
+  });
+
+  it('should update the users balance', async () => {
+    const [agent, user, receiver] = await signUpAndLogin();
+
+
+    await agent
+      .post('/api/v1/transactions')
+      .send({ amount: 10, sender: user.id, receiver: receiver.id });
+    const senderProfile = await Profile.getById(user.id);
+    const receiverProfile = await Profile.getById(receiver.id);
+
+    expect(senderProfile.balance).toBe('90');
+    expect(receiverProfile.balance).toBe('110');
   });
 });

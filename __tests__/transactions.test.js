@@ -48,7 +48,7 @@ describe('block-majic profile routes', () => {
 
     const res = await agent
       .post('/api/v1/transactions')
-      .send({ amount: '10', sender: user.id, receiver: receiver.id });
+      .send({ amount: 10, sender: user.id, receiver: receiver.id });
     
 
     expect(res.body).toEqual({
@@ -67,7 +67,7 @@ describe('block-majic profile routes', () => {
 
     const res = await agent
       .post('/api/v1/transactions')
-      .send({ amount: '10', sender: user.id, receiver: receiver.id });
+      .send({ amount: 10, sender: user.id, receiver: receiver.id });
 
     expect(res.body).toEqual({
       amount: '10',
