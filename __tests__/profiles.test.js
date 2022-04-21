@@ -108,6 +108,9 @@ describe('block-majic profile routes', () => {
     await agent
       .post('/api/v1/transactions')
       .send({ amount: 10, sender: user.id, receiver: receiver.id });
+    await agent
+      .post('/api/v1/transactions')
+      .send({ amount: 25, sender: user.id, receiver: receiver.id });
 
     const res = await agent
       .get('/api/v1/profiles/alltransactions')
