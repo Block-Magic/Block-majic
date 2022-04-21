@@ -4,6 +4,10 @@ const request = require('supertest');
 const app = require('../lib/app');
 const UserService = require('../lib/services/UserService');
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8cc67a3f65a8ee53260fb7b3a141ccb98970bbdc
 describe('block-majic user routes', () => {
   beforeEach(() => {
     return setup(pool);
@@ -39,7 +43,11 @@ describe('block-majic user routes', () => {
       .send({ email, password: 'yourmomrules' })
       .redirects(1);
 
+<<<<<<< HEAD
     expect(res.req.path).toEqual('/api/v1/users/homepage');
+=======
+    expect(res.req.path).toEqual('/api/v1/profiles');
+>>>>>>> 8cc67a3f65a8ee53260fb7b3a141ccb98970bbdc
   });
 
   it('Should delete cookie from user object', async () => {
