@@ -4,7 +4,6 @@ const request = require('supertest');
 const app = require('../lib/app');
 const UserService = require('../lib/services/UserService');
 
-
 describe('block-majic user routes', () => {
   beforeEach(() => {
     return setup(pool);
