@@ -2,11 +2,8 @@
 -- The SQL in this file will be executed when you run `npm run setup-db`
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS profiles CASCADE;
-<<<<<<< HEAD
-=======
 DROP TABLE IF EXISTS transactions CASCADE;
 DROP TABLE IF EXISTS ledger CASCADE;
->>>>>>> 8cc67a3f65a8ee53260fb7b3a141ccb98970bbdc
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE users (
@@ -17,18 +14,12 @@ CREATE TABLE users (
 
 CREATE TABLE profiles (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-<<<<<<< HEAD
-    user_id uuid REFERENCES users(user_id) UNIQUE, 
-=======
     user_id uuid REFERENCES users(user_id) UNIQUE,
     key_pair TEXT NOT NULL,
->>>>>>> 8cc67a3f65a8ee53260fb7b3a141ccb98970bbdc
     public_key TEXT NOT NULL,
     private_key TEXT NOT NULL,
     balance BIGINT NOT NULL
 );
-<<<<<<< HEAD
-=======
 
 CREATE TABLE transactions (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -55,4 +46,3 @@ VALUES(
     0000,
     0000
 )
->>>>>>> 8cc67a3f65a8ee53260fb7b3a141ccb98970bbdc

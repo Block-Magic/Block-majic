@@ -3,11 +3,6 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const UserService = require('../lib/services/UserService');
-<<<<<<< HEAD
-const ProfileService = require('../lib/services/ProfileService');
-const Profile = require('../lib/models/Profile');
-
-=======
 
 const Profile = require('../lib/models/Profile');
 
@@ -33,7 +28,6 @@ const signUpAndLogin = async () => {
   return [agent, user, receiver];
 };
 
->>>>>>> 8cc67a3f65a8ee53260fb7b3a141ccb98970bbdc
 describe('block-majic profile routes', () => {
   beforeEach(() => {
     return setup(pool);
@@ -57,8 +51,6 @@ describe('block-majic profile routes', () => {
       id: expect.any(String),
     });
   });
-<<<<<<< HEAD
-=======
 
   it('Should fetch a list of all Users and display the public keys for each', async () => {
     const agent = request.agent(app);
@@ -128,5 +120,4 @@ describe('block-majic profile routes', () => {
       transactions: expect.any(Array),
     });
   });
->>>>>>> 8cc67a3f65a8ee53260fb7b3a141ccb98970bbdc
 });
