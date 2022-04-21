@@ -47,7 +47,7 @@ describe('block-majic profile routes', () => {
     const res = await agent
       .post('/api/v1/transactions')
       .send({ amount: 10, sender: user.id, receiver: receiver.id });
-    
+
 
     expect(res.body).toEqual({
       current_hash: expect.any(String),
@@ -55,7 +55,7 @@ describe('block-majic profile routes', () => {
       previous_hash: expect.any(String),
       timestamp: expect.any(String),
       transactions: expect.any(Array),
-      
+
     });
   });
 
@@ -73,11 +73,6 @@ describe('block-majic profile routes', () => {
       receiverId: expect.any(String),
       timestamp:expect.any(String),
       signature: expect.any(String)
-
-
-   
     });
-
-
   });
 });
