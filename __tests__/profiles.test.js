@@ -120,4 +120,25 @@ describe('block-majic profile routes', () => {
       transactions: expect.any(Array),
     });
   });
+
+  it('Should return a list of all transactions for given user', async () => {
+    const [agent, user, receiver] = await signUpAndLogin();
+
+    await agent
+      .post('/api/v1/transactions')
+      .send({ amount: 10, sender: user.id, receiver: receiver.id });
+    await agent
+      .post('/api/v1/transactions')
+      .send({ amount: 25, sender: user.id, receiver: receiver.id });
+
+    const res = await agent
+      .get('/api/v1/profiles/sumSentTransactions')
+      .send({ id: user.id });
+
+    expect(res.body).toEqual({
+      sumOfSentTransactions: expect.any(String),
+    });
+  });
+
+
 });
